@@ -35,7 +35,11 @@
         <div class="form-group">
             <label class="control-label col-sm-2">Categories:</label>
             <div class="col-xs-2" th:each="category : ${restaurantCategories}">
-                <input type="checkbox" name="categories" id="categories" th:value="${category.id}" th:text="${category.name}" />
+                <input th:if=" ${restaurant.categories.contains(category)}" type="checkbox" name="categories"
+                       id="category" th:value="${category.id}" th:text="${category.name}" checked="checked"/>
+
+                <input th:if=" ${!restaurant.categories.contains(category)}" type="checkbox" name="categories"
+                       id="categories" th:value="${category.id}" th:text="${category.name}"/>
             </div>
         </div>
 
@@ -55,15 +59,16 @@
             <label class="control-label col-sm-2">Images:</label>
 
             <div class="row">
-                <input type="file" name="file" th:value="${restaurant.photo}" id="photo" class="form-control" multiple="multiple"/>
+                <input type="file" name="file" th:value="${restaurant.photo}" id="photo" class="form-control"
+                       multiple="multiple"/>
                 <div class="col-sm-6 col-md-3">
                     <div class="card" th:each="photo : ${photos}">
-                        <img class="thumbnail" th:src= "@{'data:image/jpg;base64,' +  ${photo}}" />
+                        <img class="thumbnail" th:src="@{'data:image/jpg;base64,' +  ${photo}}"/>
                     </div>
                 </div>
             </div>
             <div th:each="image : ${images}">
-                <a th:href= "${'/restaurant/delete/photo/' + image.id}" >Eliminar </a>
+                <a th:href="${'/restaurant/delete/photo/' + image.id}">Eliminar </a>
             </div>
 
         </div>

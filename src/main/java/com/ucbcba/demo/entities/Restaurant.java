@@ -35,7 +35,7 @@ public class Restaurant {
     @ManyToMany
     @JoinTable(name = "restaurant_category", joinColumns = @JoinColumn(name = "restaurant_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name="category_id", referencedColumnName = "id"))
-    public Set<Category> categories;
+    private Set<Category> categories;
 
     @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL)
     private List<Photo> photo;
