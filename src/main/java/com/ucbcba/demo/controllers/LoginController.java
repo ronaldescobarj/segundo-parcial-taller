@@ -3,6 +3,7 @@ package com.ucbcba.demo.Controllers;
 import com.ucbcba.demo.entities.User;
 import com.ucbcba.demo.services.SecurityService;
 import com.ucbcba.demo.services.UserService;
+import com.ucbcba.demo.services.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,10 +21,13 @@ public class LoginController {
 
     private final SecurityService securityService;
 
+    private final CityService cityService;
+
     @Autowired
-    public LoginController(UserService userService, SecurityService securityService) {
+    public LoginController(UserService userService, SecurityService securityService, CityService cityService) {
         this.userService = userService;
         this.securityService = securityService;
+        this.cityService = cityService;
     }
 
     //@Autowired
@@ -31,6 +35,7 @@ public class LoginController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registrationInit(Model model) {
+        model.addAttribute("cities", cityService.listAllCities());
         model.addAttribute("user", new User());
         return "registration";
     }
@@ -69,9 +74,10 @@ public class LoginController {
             userService.save(user);
             securityService.autologin(user.getUsername(), user.getPasswordConfirm());
             model.addAttribute("successMessage", "User has been registered successfully");
-            model.addAttribute("user", new User());
+            //model.addAttribute("user", new User());
         }
-        return "registration";
+        return "login";
+        //return "registration";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

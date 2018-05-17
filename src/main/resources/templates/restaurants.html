@@ -20,6 +20,9 @@
                 Descripcion
             </th>
             <th>
+                Level price
+            </th>
+            <th>
                 Opciones
             </th>
         </tr>
@@ -28,6 +31,8 @@
             <td th:text="${restaurant.name}">
             </td>
             <td th:text="${restaurant.description}">
+            </td>
+            <td th:text="${restaurant.levelPrice.description}">
             </td>
             <td>
                 <a class="btn btn-secondary" title="View" th:href="${'/admin/restaurant/' + restaurant.id}">

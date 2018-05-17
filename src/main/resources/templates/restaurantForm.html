@@ -56,6 +56,18 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="control-label col-sm-2">Level price:</label>
+            <div class="col-sm-10">
+                <select name="levelPrice" id="levelPrice" class="form-control">
+                    <option th:each="levelPrice : ${levelPrices}"
+                            th:value="${levelPrice.id}"
+                            th:text="${levelPrice.description}"
+                            th:selected="${levelPrice.id} == ${restaurant.levelPrice.id}">
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="control-label col-sm-2">Images:</label>
 
             <div class="row">

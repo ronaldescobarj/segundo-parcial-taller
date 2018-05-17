@@ -29,6 +29,10 @@ public class Restaurant {
     @JoinColumn(name = "city_id")
     private City city;
 
+    @ManyToOne
+    @JoinColumn(name = "level_price_id")
+    private LevelPrice levelPrice;
+
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.REMOVE)
     private List<Comment> comments;
 
@@ -102,5 +106,13 @@ public class Restaurant {
 
     public void setPhoto(List<Photo> photos) {
         this.photo = photos;
+    }
+
+    public LevelPrice getLevelPrice() {
+        return levelPrice;
+    }
+
+    public void setLevelPrice(LevelPrice levelPrice) {
+        this.levelPrice = levelPrice;
     }
 }

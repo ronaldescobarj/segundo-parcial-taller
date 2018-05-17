@@ -1,12 +1,15 @@
 package com.ucbcba.demo.entities;
 
+import javax.persistence.Entity;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
-@Table(name = "user")
+//@Table(name = "user")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Size(min=1, message="This field cannot be blank")
     private String username;
@@ -22,8 +25,11 @@ public class User {
     @Size(min=1, message="This field cannot be blank")
     private String lastName;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
+
+
     public Long getId() {
         return id;
     }
@@ -87,6 +93,14 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 }
                                         
